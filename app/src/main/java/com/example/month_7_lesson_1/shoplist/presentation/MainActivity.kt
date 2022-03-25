@@ -36,14 +36,17 @@ class MainActivity : AppCompatActivity() {
             val item = ShopItem(getString(R.string.cucumbers), 2, false)
             shopItemListId.add(item)
             viewModel.addShopItem(item)
+            viewModel.getShopList()
         }
         deleteBtn.setOnClickListener {
             val reversedShopItem = shopItemListId.reversed()
             viewModel.deleteShopItem(reversedShopItem[0])
+            viewModel.getShopList()
         }
         showIdBtn.setOnClickListener {
             val shopItem = viewModel.getShopItem(editText.text.toString().toInt())
             toast(getString(R.string.id_item) + shopItem.id.toString())
+            viewModel.getShopList()
         }
         showBtn.setOnClickListener {
             viewModel.getShopList()
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             viewModel.editShopItem(item)
+            viewModel.getShopList()
         }
 
     }
