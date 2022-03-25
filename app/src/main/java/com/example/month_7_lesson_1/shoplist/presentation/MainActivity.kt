@@ -30,26 +30,25 @@ class MainActivity : AppCompatActivity() {
             Log.e("shamal", "ShopList: $it")
         }
     }
-
     private fun initListeners() = with(binding) {
         addBtn.setOnClickListener {
             val item = ShopItem(getString(R.string.cucumbers), 2, false)
             shopItemListId.add(item)
             viewModel.addShopItem(item)
-            viewModel.getShopList()
+            show()
         }
         deleteBtn.setOnClickListener {
             val reversedShopItem = shopItemListId.reversed()
             viewModel.deleteShopItem(reversedShopItem[0])
-            viewModel.getShopList()
+            show()
         }
         showIdBtn.setOnClickListener {
             val shopItem = viewModel.getShopItem(editText.text.toString().toInt())
             toast(getString(R.string.id_item) + shopItem.id.toString())
-            viewModel.getShopList()
+            show()
         }
         showBtn.setOnClickListener {
-            viewModel.getShopList()
+            show()
         }
         editBtn.setOnClickListener {
             val reversedShopItem = shopItemListId.reversed()
@@ -61,8 +60,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             viewModel.editShopItem(item)
-            viewModel.getShopList()
+            show()
         }
 
+    }
+
+    private fun show (){
+        viewModel.getShopList()
     }
 }
