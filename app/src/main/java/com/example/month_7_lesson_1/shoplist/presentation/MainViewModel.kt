@@ -1,10 +1,7 @@
 package com.example.month_7_lesson_1.shoplist.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.month_7_lesson_1.shoplist.data.ShopListRepositoryImpl
-import com.example.month_7_lesson_1.shoplist.domain.ShopListRepository
 import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
 import com.example.month_7_lesson_1.shoplist.domain.usecases.*
 
@@ -21,14 +18,7 @@ class MainViewModel : ViewModel() {
 
     private val getShopListUseCase = GetShopListUseCase(repository)
 
-    private val _shopListLD = MutableLiveData<List<ShopItem>>()
-
-    val shopListLD: LiveData<List<ShopItem>>
-        get() = _shopListLD
-
-    fun getShopList() {
-        _shopListLD.value = getShopListUseCase.getShopList()
-    }
+    val shopListLD = getShopListUseCase.getShopList()
 
     fun addShopItem(shopItem: ShopItem) {
         addShopItemUseCase.addShopItem(shopItem)
@@ -42,7 +32,8 @@ class MainViewModel : ViewModel() {
        return getShopItemUseCase.getShopItem(shopItemId)
     }
 
-    fun editShopItem(shopItem: ShopItem){
-        editShopItemUseCase.editShopItem(shopItem)
+    fun changeEnableState(shopItem: ShopItem){
+        val newItem = shopItem.copy(enable = !shopItem.enable)
+        editShopItemUseCase.editShopItem(newItem)
     }
 }

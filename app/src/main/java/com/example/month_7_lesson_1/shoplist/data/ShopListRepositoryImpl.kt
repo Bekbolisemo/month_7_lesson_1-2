@@ -1,9 +1,14 @@
 package com.example.month_7_lesson_1.shoplist.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.month_7_lesson_1.shoplist.domain.ShopListRepository
 import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
+import java.lang.RuntimeException
 
 class ShopListRepositoryImpl() : ShopListRepository {
+
+    private val shopListLD = MutableLiveData<List<ShopItem>>()
 
     private val shopList = mutableListOf<ShopItem>()
 
@@ -14,43 +19,34 @@ class ShopListRepositoryImpl() : ShopListRepository {
             shopItem.id = autoIncrementId++
         }
         shopList.add(shopItem)
+        updateList()
     }
 
     override fun deleteShopItem(shopItem: ShopItem) {
-        val reversShopList = mutableListOf<ShopItem>()
-        reversShopList.addAll(shopList)
-        reversShopList.reverse()
-        val s = shopList.indices
-        for (i in s) {
-            if (shopList[i].id == reversShopList[0].id) {
-                shopList.removeAt(shopItem.id)
-                reversShopList.clear()
-                autoIncrementId--
-            }
-        }
+        shopList.remove(shopItem)
+        updateList()
     }
 
     override fun editShopItem(shopItem: ShopItem) {
-        val reversShopList = mutableListOf<ShopItem>()
-        reversShopList.addAll(shopList)
-        reversShopList.reverse()
-        reversShopList[0] = shopItem
+
+        val oldElement = shopList[shopItem.id]
+        deleteShopItem(oldElement)
+        addShopItem(shopItem)
     }
 
 
     override fun getShopItem(shopItemId: Int): ShopItem {
-        val s = shopList.indices
-        var index = 0
-        for (i in s) {
-            if (shopList[i].id == shopItemId) {
-                index = i
-            }
-        }
-        return shopList[index]
+        return shopList.find {
+            it.id == shopItemId
+        } ?: throw  RuntimeException("Element with id $shopItemId not fount")
     }
 
-    override fun getShopList(): List<ShopItem> {
-        return shopList
+    override fun getShopList(): LiveData<List<ShopItem>> {
+        return shopListLD
+    }
+
+    private fun updateList(){
+        shopListLD.value = shopList.toList()
     }
 
 }

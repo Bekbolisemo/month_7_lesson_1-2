@@ -1,5 +1,6 @@
 package com.example.month_7_lesson_1.shoplist.domain
 
+import androidx.lifecycle.LiveData
 import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
 
 interface ShopListRepository {
@@ -11,6 +12,6 @@ interface ShopListRepository {
 
     fun getShopItem(shopItemId: Int): ShopItem
 
-    fun getShopList(): List<ShopItem>
+    fun getShopList(): LiveData<List<ShopItem>>
 
 }

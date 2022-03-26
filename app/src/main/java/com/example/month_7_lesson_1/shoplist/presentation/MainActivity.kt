@@ -3,7 +3,6 @@ package com.example.month_7_lesson_1.shoplist.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.month_7_lesson_1.R
@@ -30,42 +29,27 @@ class MainActivity : AppCompatActivity() {
             Log.e("shamal", "ShopList: $it")
         }
     }
+
     private fun initListeners() = with(binding) {
         addBtn.setOnClickListener {
             val item = ShopItem(getString(R.string.cucumbers), 2, false)
             shopItemListId.add(item)
             viewModel.addShopItem(item)
-            show()
         }
         deleteBtn.setOnClickListener {
             val reversedShopItem = shopItemListId.reversed()
             viewModel.deleteShopItem(reversedShopItem[0])
-            show()
         }
         showIdBtn.setOnClickListener {
             val shopItem = viewModel.getShopItem(editText.text.toString().toInt())
             toast(getString(R.string.id_item) + shopItem.id.toString())
-            show()
         }
         showBtn.setOnClickListener {
-            show()
         }
         editBtn.setOnClickListener {
-            val reversedShopItem = shopItemListId.reversed()
-            val item = ShopItem(editText.text.toString(),2,false)
-            val s = shopItemListId.indices
-            for (i in s){
-                if (reversedShopItem[0] == shopItemListId[i]){
-                    shopItemListId[i] = item
-                }
-            }
-            viewModel.editShopItem(item)
-            show()
+            viewModel.changeEnableState(ShopItem(getString(R.string.cucumbers), 2, false, 0))
         }
 
     }
 
-    private fun show (){
-        viewModel.getShopList()
-    }
 }

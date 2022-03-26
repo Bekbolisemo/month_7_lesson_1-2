@@ -7,7 +7,7 @@
     tools:context=".shoplist.presentation.MainActivity">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,44 +36,58 @@
 
         <Button
             android:id="@+id/addBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
-            android:text="@string/add" />
+            android:backgroundTint="@color/purple_500"
+            android:text="@string/add"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/deleteBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
-            android:text="@string/delete" />
+            android:backgroundTint="@color/purple_500"
+            android:text="@string/delete"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/editBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/purple_500"
             android:text="@string/edit"
-            />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/showIdBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
-            android:text="@string/show_id" />
+            android:backgroundTint="@color/purple_500"
+            android:text="@string/show_id"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/showBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_8dp"
             android:layout_weight="1"
-            android:text="@string/show" />
+            android:backgroundTint="@color/purple_500"
+            android:text="@string/show"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <EditText
@@ -85,5 +99,6 @@
         android:hint="@string/id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear" />
+        app:layout_constraintTop_toBottomOf="@+id/linear"
+        tools:ignore="Autofill,TextFields" />
 </androidx.constraintlayout.widget.ConstraintLayout>
