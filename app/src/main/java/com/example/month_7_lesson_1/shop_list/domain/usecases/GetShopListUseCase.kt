@@ -1,8 +1,8 @@
-package com.example.month_7_lesson_1.shoplist.domain.usecases
+package com.example.month_7_lesson_1.shop_list.domain.usecases
 
 import androidx.lifecycle.LiveData
-import com.example.month_7_lesson_1.shoplist.domain.ShopListRepository
-import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
+import com.example.month_7_lesson_1.shop_list.domain.ShopListRepository
+import com.example.month_7_lesson_1.shop_list.domain.entities.ShopItem
 
 class GetShopListUseCase(private val shopListRepository: ShopListRepository) {
 

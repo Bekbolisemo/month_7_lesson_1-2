@@ -1,4 +1,4 @@
-package com.example.month_7_lesson_1.shoplist.domain.entities
+package com.example.month_7_lesson_1.shop_list.domain.entities
 
 data class ShopItem(
     val name: String,

@@ -8,4 +8,5 @@
     <string name="cucumbers">cucumbers</string>
     <string name="show">Show</string>
     <string name="edit">Edit</string>
+    <string name="enable">\"enable= \"</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.month_7_lesson_1.shoplist.extanhion
+package com.example.month_7_lesson_1.shop_list.extanhion
 
 import android.content.Context
 import android.widget.Toast

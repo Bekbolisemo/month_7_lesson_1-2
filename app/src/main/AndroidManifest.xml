@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Month_7_lesson_1">
         <activity
-            android:name=".shoplist.presentation.MainActivity"
+            android:name=".shop_list.presentation.second_activity.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".shop_list.presentation.main_activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

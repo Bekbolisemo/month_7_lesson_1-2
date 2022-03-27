@@ -1,9 +1,9 @@
-package com.example.month_7_lesson_1.shoplist.presentation
+package com.example.month_7_lesson_1.shop_list.presentation.main_activity
 
 import androidx.lifecycle.ViewModel
-import com.example.month_7_lesson_1.shoplist.data.ShopListRepositoryImpl
-import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
-import com.example.month_7_lesson_1.shoplist.domain.usecases.*
+import com.example.month_7_lesson_1.shop_list.data.ShopListRepositoryImpl
+import com.example.month_7_lesson_1.shop_list.domain.entities.ShopItem
+import com.example.month_7_lesson_1.shop_list.domain.usecases.*
 
 class MainViewModel : ViewModel() {
     private val repository = ShopListRepositoryImpl()

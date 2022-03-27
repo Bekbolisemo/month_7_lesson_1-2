@@ -1,9 +1,9 @@
-package com.example.month_7_lesson_1.shoplist.data
+package com.example.month_7_lesson_1.shop_list.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.month_7_lesson_1.shoplist.domain.ShopListRepository
-import com.example.month_7_lesson_1.shoplist.domain.entities.ShopItem
+import com.example.month_7_lesson_1.shop_list.domain.ShopListRepository
+import com.example.month_7_lesson_1.shop_list.domain.entities.ShopItem
 import java.lang.RuntimeException
 
 class ShopListRepositoryImpl() : ShopListRepository {
@@ -28,7 +28,6 @@ class ShopListRepositoryImpl() : ShopListRepository {
     }
 
     override fun editShopItem(shopItem: ShopItem) {
-
         val oldElement = shopList[shopItem.id]
         deleteShopItem(oldElement)
         addShopItem(shopItem)
