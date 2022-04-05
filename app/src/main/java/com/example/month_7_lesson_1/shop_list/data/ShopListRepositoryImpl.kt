@@ -2,8 +2,12 @@ package com.example.month_7_lesson_1.shop_list.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.example.month_7_lesson_1.shop_list.room.App
 import com.example.month_7_lesson_1.shop_list.domain.ShopListRepository
 import com.example.month_7_lesson_1.shop_list.domain.entities.ShopItem
+import com.example.month_7_lesson_1.shop_list.room.Mapper
+import com.example.month_7_lesson_1.shop_list.room.ShopItemEntity
 import java.lang.RuntimeException
 import kotlin.random.Random
 
@@ -11,14 +15,18 @@ class ShopListRepositoryImpl() : ShopListRepository {
 
     private val shopListLD = MutableLiveData<List<ShopItem>>()
 
+    private val mapper = Mapper()
+
     private val shopList = mutableListOf<ShopItem>()
 
     private var autoIncrementId = 0
 
     init {
-        for (i in 0 until 50 ){
-
-            val item = ShopItem("banana: $i",i,Random.nextBoolean())
+        for (i in 0 until 50) {
+            var id = 0
+            val item = ShopItem("banana: $i", i, Random.nextBoolean())
+           App.dataBase.shopItemDao()
+                .insert(ShopItemEntity(id++,"pear $i",i, Random.nextBoolean()))
             addShopItem(item)
         }
     }
@@ -33,6 +41,7 @@ class ShopListRepositoryImpl() : ShopListRepository {
 
     override fun deleteShopItem(shopItem: ShopItem) {
         shopList.remove(shopItem)
+        App.dataBase.shopItemDao().delete(mapper.shopItemToShopItemEntity(shopItem))
         updateList()
     }
 
@@ -49,11 +58,15 @@ class ShopListRepositoryImpl() : ShopListRepository {
         } ?: throw  RuntimeException("Element with id $shopItemId not fount")
     }
 
-    override fun getShopList(): LiveData<List<ShopItem>> {
-        return shopListLD
+    override fun getShopList(): LiveData<List<ShopItem>> = Transformations.map(
+        App.dataBase.shopItemDao().getAll()
+    ){
+        mapper.shopItemEntityListToShopItemList(it)
     }
 
-    private fun updateList(){
+
+
+    private fun updateList() {
         shopListLD.value = shopList.toList()
     }
 

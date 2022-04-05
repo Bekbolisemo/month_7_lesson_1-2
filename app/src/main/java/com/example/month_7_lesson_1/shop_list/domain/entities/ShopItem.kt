@@ -4,10 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
 data class ShopItem(
-    @PrimaryKey val shopItemId:Int,
-    val name: String?,
+    val name: String,
     val count: Int,
     var enable: Boolean,
     var id: Int = UNDEFINED_ID

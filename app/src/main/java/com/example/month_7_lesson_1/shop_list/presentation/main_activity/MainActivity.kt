@@ -78,39 +78,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        viewModel.shopListLD.observe(this) {
-           /* binding.tvText.text = shopItemListId.toString()*/
+        viewModel.shopListLD.observe(this) { it ->
             Log.e("shamal", "ShopList: $it")
             shopListAdapter.shopList = it
         }
     }
-
-    /*
-       private fun initListeners() = with(binding) {
-           addBtn.setOnClickListener {
-               val item = ShopItem(getString(R.string.cucumbers), 2, false)
-               shopItemListId.add(item)
-               viewModel.addShopItem(item)
-           }
-           deleteBtn.setOnClickListener {
-               val reversedShopItem = shopItemListId.reversed()
-               viewModel.deleteShopItem(reversedShopItem[0])
-           }
-           showIdBtn.setOnClickListener {
-               val shopItem = viewModel.getShopItem(editText.text.toString().toInt())
-               toast(getString(R.string.id_item) + shopItem.id.toString())
-           }
-           showBtn.setOnClickListener {
-           }
-           editBtn.setOnClickListener {
-               viewModel.changeEnableState(ShopItem(getString(R.string.cucumbers), 2, false, 0))
-           }
-           fabPut.setOnClickListener {
-               putList.addAll(shopItemListId)
-               val intent = Intent(this@MainActivity, SecondActivity::class.java)
-               startActivity(intent)
-           }
-
-       }*/
 
 }
