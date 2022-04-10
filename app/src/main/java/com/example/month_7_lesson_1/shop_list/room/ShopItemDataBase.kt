@@ -6,6 +6,6 @@ import androidx.room.RoomDatabase
 @Database(entities = [ShopItemEntity::class],version = 1,exportSchema = false)
 abstract class ShopItemDataBase : RoomDatabase() {
 
-   abstract fun shopItemDao() : ShopItemDao
+   abstract fun shopListDao() : ShopItemDao
 
 }

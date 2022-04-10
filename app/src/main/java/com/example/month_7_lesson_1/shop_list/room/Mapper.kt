@@ -20,4 +20,8 @@ class Mapper{
     fun shopItemEntityListToShopItemList(list: List<ShopItemEntity>) = list.map {
         shopItemEntityToShopItem(it)
     }
+
+    fun shopItemToShopItemEntityList(list:List<ShopItem>) = list.map {
+        shopItemToShopItemEntity(it)
+    }
 }

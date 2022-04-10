@@ -1,19 +1,23 @@
 package com.example.month_7_lesson_1.shop_list.presentation.main_activity
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.month_7_lesson_1.R
 import com.example.month_7_lesson_1.shop_list.domain.entities.ShopItem
 import java.lang.RuntimeException
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ShopListAdapter(
-) : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
+class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
 
-    var shopList = listOf<ShopItem>()
+    var shopList = arrayListOf<ShopItem>()
         set(value) {
             val callback = ShopListDiffCallback(shopList, value)
             val diffResult = DiffUtil.calculateDiff(callback)
@@ -21,7 +25,7 @@ class ShopListAdapter(
             field = value
         }
 
-    var onShopItemClickListener: ((ShopItem,enabled:Boolean) -> Int)? = null
+    var onShopItemClickListener: ((ShopItem, enabled: Boolean) -> Int)? = null
     var onShopItemLongClickListener: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
@@ -47,7 +51,7 @@ class ShopListAdapter(
         val item = shopList[position]
         holder.onBind(item)
         holder.itemView.setOnClickListener {
-           onShopItemClickListener?.invoke(item,item.enable)
+            onShopItemClickListener?.invoke(item, item.enable)
             notifyItemChanged(position)
         }
         holder.itemView.setOnLongClickListener {
@@ -76,4 +80,6 @@ class ShopListAdapter(
         const val VIEW_TYPE_ENABLED = 1
         const val VIEW_TYPE_DISABLED = 0
     }
+
+
 }

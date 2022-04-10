@@ -25,8 +25,8 @@ class ShopListRepositoryImpl() : ShopListRepository {
         for (i in 0 until 50) {
             var id = 0
             val item = ShopItem("banana: $i", i, Random.nextBoolean())
-           App.dataBase.shopItemDao()
-                .insert(ShopItemEntity(id++,"pear $i",i, Random.nextBoolean()))
+           App.dataBase.shopListDao()
+                .addShopItem(ShopItemEntity(id++,"pear $i",i, Random.nextBoolean()))
             addShopItem(item)
         }
     }
@@ -41,7 +41,7 @@ class ShopListRepositoryImpl() : ShopListRepository {
 
     override fun deleteShopItem(shopItem: ShopItem) {
         shopList.remove(shopItem)
-        App.dataBase.shopItemDao().delete(mapper.shopItemToShopItemEntity(shopItem))
+        App.dataBase.shopListDao().delete(mapper.shopItemToShopItemEntity(shopItem))
         updateList()
     }
 
@@ -59,7 +59,7 @@ class ShopListRepositoryImpl() : ShopListRepository {
     }
 
     override fun getShopList(): LiveData<List<ShopItem>> = Transformations.map(
-        App.dataBase.shopItemDao().getAll()
+        App.dataBase.shopListDao().getAll()
     ){
         mapper.shopItemEntityListToShopItemList(it)
     }
